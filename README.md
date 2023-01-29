@@ -8,7 +8,7 @@ How to change path?
  Example:
 "Path_of_Directory_in_which_you_have_downloaded\WD_INNOVATIVE\songs\Angry", "Path_of_Directory_in_which_you_have_downloaded\WD_INNOVATIVE\songs\Happy", "Path_of_Directory_in_which_you_have_downloaded\WD_INNOVATIVE\songs\Sad", "Path_of_Directory_in_which_you_have_downloaded\WD_INNOVATIVE\songs\Neutral".
  
-After execution if the error displayed is like "unicodespace can't decode bytes" , then you need to use two front slashes like "\\" in the above path.
+After execution if the error displayed is like "unicodespace can't decode bytes" , then you need to use two front slashes like \\ in the above path.
  
 Execution Details:
 1) Run "prediction.py" file and then wait for a moment.
