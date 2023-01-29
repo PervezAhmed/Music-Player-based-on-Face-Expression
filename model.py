@@ -14,7 +14,7 @@ from IPython.display import SVG, Image
 from livelossplot.inputs.tf_keras import PlotLossesCallback
 import tensorflow as tf
 
-
+#Number of images in training dataset of each expression 
 # for expression in os.listdir("D:/Project/Emotion_Based_Music_Player/train/train"):
 #     print(str(len(os.listdir("D:/Project/Emotion_Based_Music_Player/train/train/" + expression))) + " " + expression + " images")
 
@@ -56,6 +56,20 @@ model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.25))
 
+# 3rd Convolution layer
+model.add(Conv2D(512,(3,3), padding='same'))
+model.add(BatchNormalization())
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(0.25))
+
+# 4th Convolution layer
+model.add(Conv2D(512,(3,3), padding='same'))
+model.add(BatchNormalization())
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(0.25))
+
 # Flattening
 model.add(Flatten())
 
@@ -73,15 +87,6 @@ model.add(Dropout(0.25))
 
 model.add(Dense(7, activation='softmax'))
 
-# ip = Input(shape=(48, 48,1))
-
-# m = Dense(512, activation="relu")(ip)
-# m = Dense(256, activation="relu")(m)
-
-# op = Dense(7, activation="softmax")(m) 
-
-# model = Model(inputs=ip, outputs=op)
-
 opt = Adam(lr=0.0005)
 model.compile(optimizer=opt, loss='categorical_crossentropy', metrics=['accuracy'])
 model.summary()
@@ -90,7 +95,7 @@ model.summary()
 # Image('model.png',width=400, height=200)
 
 
-epochs = 20
+epochs = 50
 steps_per_epoch = train_generator.n//train_generator.batch_size
 validation_steps = validation_generator.n//validation_generator.batch_size
 reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.1,
