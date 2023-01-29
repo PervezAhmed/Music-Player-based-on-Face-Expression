@@ -5,7 +5,8 @@ Please change the path of songs and images.
 How to change path?
 1) Copy all the folder path of songs and paste in "folderspath" variable of "prediction.py" file, in the order of Angry,Happy,Sad,Neutral paths.(Path order is necessary).
 
- Eg "Path_of_Directory_in_which_you_have_downloaded\WD_INNOVATIVE\songs\Angry", "Path_of_Directory_in_which_you_have_downloaded\WD_INNOVATIVE\songs\Happy", "Path_of_Directory_in_which_you_have_downloaded\WD_INNOVATIVE\songs\Sad", "Path_of_Directory_in_which_you_have_downloaded\WD_INNOVATIVE\songs\Neutral".
+ Example:
+"Path_of_Directory_in_which_you_have_downloaded\WD_INNOVATIVE\songs\Angry", "Path_of_Directory_in_which_you_have_downloaded\WD_INNOVATIVE\songs\Happy", "Path_of_Directory_in_which_you_have_downloaded\WD_INNOVATIVE\songs\Sad", "Path_of_Directory_in_which_you_have_downloaded\WD_INNOVATIVE\songs\Neutral".
  
 After execution if the error displayed is like "unicodespace can't decode bytes" , then you need to use two front slashes like "\\" in the above path.
  
