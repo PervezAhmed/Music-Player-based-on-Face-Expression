@@ -1,13 +1,18 @@
+# Dataset : https://www.kaggle.com/aadityasinghal/facial-expression-dataset
+
 from tensorflow.keras.models import model_from_json
 import cv2
 import numpy as np
 import eel
+import os
+import subprocess
+from playsound import playsound
+import random
 
-@eel.expose
-def getEmotion():
-        return pred 
+#path of songs folder of each expresion
+folderspath=["D:\Project\Emotion_Based_Music_Player\WD_INNOVATIVE\songs\Angry","D:\Project\Emotion_Based_Music_Player\WD_INNOVATIVE\songs\Happy","D:\Project\Emotion_Based_Music_Player\WD_INNOVATIVE\songs\Sad","D:\Project\Emotion_Based_Music_Player\WD_INNOVATIVE\songs\\Neutral"]
 
-eel.init('WD_INNOVATIVE')
+
 class FacialExpressionModel(object):
     EMOTIONS_LIST = ["Angry", "Disgust",
                     "Fear", "Happy",
@@ -28,11 +33,11 @@ class FacialExpressionModel(object):
 facec = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 model = FacialExpressionModel("model.json", "model_weights.h5")
 font = cv2.FONT_HERSHEY_SIMPLEX
+
 class VideoCamera(object):
     def __init__(self):
         self.video = cv2.VideoCapture(0)
-    def __del__(self):
-        self.video.release()
+
     # returns camera frames along with bounding boxes and predictions
     def get_frame(self):
         _, fr = self.video.read()
@@ -54,9 +59,41 @@ def gen(camera):
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
     cv2.destroyAllWindows()
-    print("You are :",pred)
-    eel.start('webpage.html')
+    
+camera = VideoCamera()
+
+@eel.expose
+def geti():
+    gen(camera)
+    global i
+    i=3
+    if pred == "Angry":
+        i=0
+    elif pred == "Happy":
+        i=1
+    elif pred == "Sad":
+        i=2
+    elif pred == "Neutral":
+        i=3
+    return i
 
 
-gen(VideoCamera())
+@eel.expose
+def playMusic():
+    music_dir = folderspath[i]
+    songs = os.listdir(music_dir)
+    playsong = os.path.join(music_dir,random.choice(songs))
+    # os.startfile(playsong)
+    songpath = playsong.split('\\')
+    songname = songpath[len(songpath)-1]
+    print(songname.split('.')[0])
+    return songname.split('.')[0]
+
+eel.init('WD_INNOVATIVE')
+
+
+eel.start('webpage.html')
+
+
+
 
